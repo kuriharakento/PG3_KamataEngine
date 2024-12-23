@@ -1,4 +1,8 @@
 #include <Novice.h>
+#include <thread>
+
+#include "SceneManager.h"
+#include "TitleScene.h"
 
 const char kWindowTitle[] = "学籍番号";
 
@@ -12,6 +16,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	char keys[256] = {0};
 	char preKeys[256] = {0};
 
+	// シーン管理を初期化
+	SceneManager::GetInstance().ChangeScene(new TitleScene());
+
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -24,7 +31,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
-
+		SceneManager::GetInstance().Update();
 		///
 		/// ↑更新処理ここまで
 		///
@@ -32,7 +39,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
-
+		SceneManager::GetInstance().Draw();
 		///
 		/// ↑描画処理ここまで
 		///
